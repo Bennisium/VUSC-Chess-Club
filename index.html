@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chess Club</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e1e8f0, #a7b6d9);
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #2c3e70;
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 6px 20px rgba(44, 62, 112, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      user-select: none;
+    }
+
+    header img {
+      width: 280px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    header img:hover,
+    header img:focus {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+      outline: none;
+    }
+
+    header h1 {
+      margin-top: 1.75rem;
+      font-weight: 600;
+      font-size: 3rem;
+      color: #f0f4f8;
+      letter-spacing: 0.1em;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 3rem auto 4rem;
+      padding: 2.5rem 2.5rem 3rem;
+      background: #f9fafc;
+      border-radius: 2rem;
+      box-shadow: 0 15px 40px rgba(44, 62, 112, 0.15);
+      text-align: center;
+    }
+
+    main h2 {
+      font-weight: 600;
+      font-size: 2.4rem;
+      margin-bottom: 1.25rem;
+      color: #2c3e70;
+      letter-spacing: 0.05em;
+    }
+
+    main p {
+      font-size: 1.18rem;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #475569;
+    }
+
+    /* SCHEDULE TABLE */
+    .schedule {
+      margin: 0 auto 3rem;
+      max-width: 720px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(44, 62, 112, 0.2);
+      font-size: 1.1rem;
+    }
+
+    .schedule thead {
+      background: linear-gradient(90deg, #1c2a56, #25407b);
+      color: #f0f4f8;
+      user-select: none;
+    }
+
+    .schedule th, .schedule td {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid #d0d7e3;
+      text-align: left;
+      transition: background-color 0.25s ease;
+    }
+
+    .schedule tbody tr {
+      background: white;
+      cursor: default;
+      transition: background-color 0.3s ease;
+    }
+    .schedule tbody tr:hover {
+      background-color: #e3eaf8;
+    }
+
+    .schedule tbody tr.upcoming {
+      background-color: #ff7043;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(255, 112, 67, 0.9);
+      cursor: default;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .schedule tbody tr.upcoming:hover {
+      background-color: #f4511e;
+      box-shadow: 0 0 15px rgba(244, 81, 30, 1);
+    }
+
+    .schedule tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* SIGNUP BUTTON */
+    .signup-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #25407b, #1c2a56);
+      color: #f0f4f8;
+      font-weight: 600;
+      font-size: 1.35rem;
+      padding: 1.4rem 3.2rem;
+      border-radius: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(37, 64, 123, 0.7);
+      letter-spacing: 0.08em;
+      user-select: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      margin-bottom: 2.5rem;
+    }
+    .signup-button:hover,
+    .signup-button:focus {
+      background: linear-gradient(135deg, #1c2a56, #25407b);
+      box-shadow: 0 14px 40px rgba(28, 42, 86, 0.95);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #2c3e70;
+      color: #d9e2ec;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      user-select: none;
+      box-shadow: inset 0 1px 4px rgba(255,255,255,0.15);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      header img {
+        width: 220px;
+        height: 220px;
+      }
+      header h1 {
+        font-size: 2.2rem;
+        margin-top: 1.2rem;
+      }
+
+      main {
+        margin: 2rem 1rem 3rem;
+        padding: 2rem 1.5rem 2.5rem;
+        border-radius: 1.5rem;
+      }
+
+      main h2 {
+        font-size: 1.9rem;
+      }
+
+      main p {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+
+      .schedule {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+
+      .signup-button {
+        font-size: 1.15rem;
+        padding: 1.2rem 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img
+      src="chessclub.png"
+      alt="Chess Club Banner"
+      tabindex="0"
+      draggable="false"
+    />
+    <h1>Welcome to Our Chess Club</h1>
+  </header>
+
+  <main>
+    <h2>Join, Play & Improve Your Chess Skills!</h2>
+    <p>
+      Whether you’re a beginner or a seasoned player, our club welcomes everyone passionate about chess.
+      We host weekly games, tournaments, and training sessions to help you sharpen your strategy and meet new friends.
+      Become part of our vibrant community and take your game to the next level.
+    </p>
+
+    <h2>Club Schedule - Term 3, 2025</h2>
+    <p>We meet every Tuesday during Term 3 for training, practice games, and tournaments.</p>
+    <table class="schedule" aria-label="Chess club schedule for Term 3, 2025" id="scheduleTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Day</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>12 August 2025</td><td>Tuesday</td><td>Opening Training & Practice Games</td></tr>
+        <tr><td>19 August 2025</td><td>Tuesday</td><td>Strategy Workshop & Friendly Matches</td></tr>
+        <tr><td>26 August 2025</td><td>Tuesday</td><td>Timed Games & Endgame Techniques</td></tr>
+        <tr><td>2 September 2025</td><td>Tuesday</td><td>Opening Theory & Blitz Tournament</td></tr>
+        <tr><td>9 September 2025</td><td>Tuesday</td><td>Tactics Training & Puzzle Solving</td></tr>
+        <tr><td>16 September 2025</td><td>Tuesday</td><td>Finals & Awards Ceremony</td></tr>
+      </tbody>
+    </table>
+
+    <a class="signup-button" href="https://forms.gle/7Z9eeQMFv3cnRUWb7" target="_blank" rel="noopener noreferrer">
+      Sign Up Now
+    </a>
+  </main>
+
+  <footer>
+    &copy; 2025 Chess Club. All rights reserved.
+  </footer>
+
+  <script>
+    (function() {
+      const today = new Date();
+      const rows = document.querySelectorAll('#scheduleTable tbody tr');
+
+      function parseDate(dateStr) {
+        return new Date(dateStr + ' 00:00:00');
+      }
+
+      let upcomingRow = null;
+      for (const row of rows) {
+        const dateText = row.cells[0].textContent.trim();
+        const sessionDate = parseDate(dateText);
+
+        if (sessionDate >= today) {
+          if (!upcomingRow || sessionDate < parseDate(upcomingRow.cells[0].textContent.trim())) {
+            upcomingRow = row;
+          }
+        }
+      }
+
+      if (upcomingRow) {
+        upcomingRow.classList.add('upcoming');
+        upcomingRow.setAttribute('aria-label', 'Upcoming session');
+      }
+    })();
+  </script>
+</body>
+</html>
